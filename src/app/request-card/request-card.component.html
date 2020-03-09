@@ -3,19 +3,44 @@
         <mat-card-header>
             <mat-form-field>
                 <mat-label>Http Method</mat-label>
-            <mat-select [(value)]="selectedHttpMethod">
-                <mat-option *ngFor="let method of methods" [value]="method.value">
-                    {{method.viewValue}}
-                  </mat-option>
-            </mat-select>
-        </mat-form-field >
-        <mat-form-field class="url-full-width" hideRequiredMarker>
-            <mat-label>URL</mat-label>
-            <input matInput type="text"  [(ngModel)]="url" required  placeholder="https://www.google.ru/">
-          </mat-form-field>
+                <mat-select [(value)]="selectedHttpMethod">
+                    <mat-option *ngFor="let method of methods" [value]="method.value">
+                        {{method.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="url-full-width" hideRequiredMarker>
+                <mat-label>URL</mat-label>
+                <input matInput type="text" [(ngModel)]="url" required placeholder="https://www.google.ru/">
+            </mat-form-field>
         </mat-card-header>
         <mat-card-content>
-            
+            <mat-tab-group>
+                <mat-tab label="Headers">
+                    <div>
+                        <mat-list>
+                            <mat-list-item *ngFor="let header of headers">
+                                
+                                        <mat-form-field class="header-elem">
+                                            <mat-label>KEY</mat-label>
+                                            <input matInput type="text" [(ngModel)]="header.key" placeholder="key">
+                                        </mat-form-field>
+                                    
+                                        <mat-form-field class="header-elem">
+                                            <mat-label>VALUE</mat-label>
+                                            <input matInput type="text" [(ngModel)]="header.value" placeholder="value">
+                                        </mat-form-field>
+                                  
+                                        <button class="header-elem" mat-raised-button color="warn">Delete</button>
+                               
+                            </mat-list-item>
+                        </mat-list>
+                        <button class="add_header" mat-raised-button (click)="addHeader()">Add Header</button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Content"> Content 2 </mat-tab>
+            </mat-tab-group>
+
         </mat-card-content>
     </mat-card>
 </div>
