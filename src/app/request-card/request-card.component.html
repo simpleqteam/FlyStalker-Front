@@ -1,1 +1,21 @@
-<p>request-card works!</p>
+<div>
+    <mat-card>
+        <mat-card-header>
+            <mat-form-field>
+                <mat-label>Http Method</mat-label>
+            <mat-select [(value)]="selectedHttpMethod">
+                <mat-option *ngFor="let method of methods" [value]="method.value">
+                    {{method.viewValue}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field >
+        <mat-form-field class="url-full-width" hideRequiredMarker>
+            <mat-label>URL</mat-label>
+            <input matInput type="text"  [(ngModel)]="url" required  placeholder="https://www.google.ru/">
+          </mat-form-field>
+        </mat-card-header>
+        <mat-card-content>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

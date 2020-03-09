@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+
+interface HttpMethod {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-request-card',
   templateUrl: './request-card.component.html',
@@ -7,9 +13,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestCardComponent implements OnInit {
 
-  constructor() { }
+  methods: HttpMethod[] = [
+    {value: 'get', viewValue: 'GET'},
+    {value: 'post', viewValue: 'POST'},
+  ];
+  selectedHttpMethod = 'get';
+  url: String;
+  constructor() { 
+  }
 
   ngOnInit(): void {
+    
   }
 
 }
