@@ -5,6 +5,11 @@ interface HttpMethod {
   value: string;
   viewValue: string;
 }
+class Header{
+  key: String;
+  value: String;
+  index: number;
+}
 
 @Component({
   selector: 'app-request-card',
@@ -17,6 +22,7 @@ export class RequestCardComponent implements OnInit {
     {value: 'get', viewValue: 'GET'},
     {value: 'post', viewValue: 'POST'},
   ];
+  headers: Header[] = [];
   selectedHttpMethod = 'get';
   url: String;
   constructor() { 
@@ -24,6 +30,9 @@ export class RequestCardComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+  addHeader(): void {
+    this.headers.push(new Header());
   }
 
 }
