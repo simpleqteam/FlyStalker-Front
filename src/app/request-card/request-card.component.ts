@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
+import { RequestService } from './request.service';
 interface HttpMethod {
   value: string;
   viewValue: string;
 }
-class Header{
+class Header {
   key: String;
   value: String;
   index: number;
@@ -17,22 +18,46 @@ class Header{
   styleUrls: ['./request-card.component.scss']
 })
 export class RequestCardComponent implements OnInit {
-
+  source: string = '';
   methods: HttpMethod[] = [
-    {value: 'get', viewValue: 'GET'},
-    {value: 'post', viewValue: 'POST'},
+    { value: 'get', viewValue: 'GET' },
+    { value: 'post', viewValue: 'POST' },
   ];
   headers: Header[] = [];
   selectedHttpMethod = 'get';
   url: String;
-  constructor() { 
+  constructor(private requestService: RequestService) {
+  }
+  public date: moment.Moment;
+  public disabled = false;
+  public showSpinners = true;
+  public disableSecond = true;
+
+  public formGroup = new FormGroup({
+    date: new FormControl(null, [Validators.required])
+  })
+  public dateControl = new FormControl(moment());
+
+  @ViewChild('picker') picker: any;
+
+  addHeader(): void {
+    let h = new Header();
+    h.index = this.headers.length;
+    this.headers.push(h);
+  }
+  deleteHeader(index: number): void {
+    this.headers.splice(index, 1);
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit() {
+    this.date = null;
   }
-  addHeader(): void {
-    this.headers.push(new Header());
+
+  closePicker() {
+    this.picker.cancel();
+  }
+  send(){
+
   }
 
 }
