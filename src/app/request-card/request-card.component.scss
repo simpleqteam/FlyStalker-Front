@@ -20,15 +20,21 @@ mat-list-item{
         color: #f0fff3;
         background-color: #22bb33;
 }
-.flex-header,
-.flex-footer{
+
+
+.flex-header{
     display: flex;
+    width: 100%;
 }
 .flex-footer{
-    margin-left: 8%;
+    
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
 }
 .footer-elem{
-    margin: 10px;
+    margin: 5px;
 }
 .content-area{
     width: 100%;
