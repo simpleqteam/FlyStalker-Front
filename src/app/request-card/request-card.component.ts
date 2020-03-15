@@ -30,14 +30,9 @@ export class RequestCardComponent implements OnInit {
   url: String;
   constructor(private requestService: RequestService, public router:Router) {
   }
-  public date: moment.Moment;
   public disabled = false;
   public showSpinners = true;
   public disableSecond = true;
-
-  public formGroup = new FormGroup({
-    date: new FormControl(null, [Validators.required])
-  })
   public dateControl = new FormControl(moment());
 
   @ViewChild('picker') picker: any;
@@ -52,7 +47,7 @@ export class RequestCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.date = null;
+
   }
 
   closePicker() {
@@ -60,10 +55,10 @@ export class RequestCardComponent implements OnInit {
   }
   send(){
     let data = new RequestModel();
-    data.Headers = this.headers;
-    data.HttpMethod = this.selectedHttpMethod;
-    data.Date = this.date;
-    data.Context = this.source;
+    data.headers = this.headers;
+    data.httpMethod = this.selectedHttpMethod;
+    data.date = this.dateControl.value;
+    data.content = this.source;
     this.requestService.sendRequest(data).subscribe();
   }
   goToList(pageName:string){
