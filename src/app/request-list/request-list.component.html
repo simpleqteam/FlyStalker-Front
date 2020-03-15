@@ -1,1 +1,35 @@
-<p>request-list works!</p>
+<div class="content center">
+    <div class="back-button">
+        <button class="to-r-button" mat-raised-button (click)="goToRequest()">To Request</button>
+    </div>
+    <div class="center">
+        <div class="margin-5">
+            <div *ngIf="!requestList">
+                <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <div *ngIf="requestList">
+                <div>
+                    <mat-list>
+                        <mat-list-item *ngFor="let elem of requestList">
+                            <mat-card>
+                                <mat-card-content>
+                                    <div>
+                                        <div>{{elem.HttpMethod}}</div>
+                                        <div>{{elem.RequestCode}}</div>
+                                        <div>{{elem.Url}}</div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div>
+                    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                        (page)="getHistoryRequest($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

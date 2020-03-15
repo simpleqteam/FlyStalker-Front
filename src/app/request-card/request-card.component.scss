@@ -13,3 +13,20 @@ mat-card{
 .header-elem{
     margin: 5px;
 }
+mat-list-item{
+    margin: 5px;
+}
+.mat-raised-button.mat-success{
+        color: #f0fff3;
+        background-color: #22bb33;
+}
+.flex-header,
+.flex-footer{
+    display: flex;
+}
+.flex-footer{
+    margin-left: 8%;
+}
+.footer-elem{
+    margin: 10px;
+}
