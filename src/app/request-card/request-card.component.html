@@ -1,4 +1,4 @@
-<div>
+<div class="main-content">
     <mat-card>
         <mat-card-header>
             <div class="flex-header">
@@ -46,11 +46,17 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Content">
-                    <textarea [(ngModel)]="source"></textarea>
+                    <mat-form-field appearance="fill" class="content-area">
+                        <mat-label>Content</mat-label>
+                        <textarea matInput></textarea>
+                      </mat-form-field>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
-        <mat-card-footer>
+
+    </mat-card>
+    <mat-card class="task-panel">
+        <mat-card-content>
             <div class="flex-footer">
                 <div class="footer-elem">
                     <mat-form-field>
@@ -63,7 +69,10 @@
                 <div class="footer-elem">
                     <button mat-raised-button color="success">Send</button>
                 </div>
+                <div class="footer-elem history-button">
+                    <button mat-raised-button (click)="goToList('list')">History</button>
+                </div>
             </div>
-        </mat-card-footer>
+        </mat-card-content>
     </mat-card>
 </div>

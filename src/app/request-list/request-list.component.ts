@@ -27,7 +27,10 @@ export class RequestListComponent implements OnInit {
   goToRequest(){
     this.router.navigate(['request']);
   }
-  public getHistoryRequest(event?:PageEvent){
+  getHistoryRequest(event?:PageEvent){
     this.listHelperService.getData(event.pageIndex*event.pageSize,event.pageSize).subscribe(l=>this.requestList=l);
+  }
+  goToInfo(id: number){
+    this.router.navigate([`response?id=${id}`]);
   }
 }

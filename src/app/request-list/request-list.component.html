@@ -17,6 +17,9 @@
                                         <div>{{elem.HttpMethod}}</div>
                                         <div>{{elem.RequestCode}}</div>
                                         <div>{{elem.Url}}</div>
+                                        <div>
+                                            <button mat-raised-button (click)="goToInfo(elem.Id)">Info</button>
+                                        </div>
                                     </div>
                                 </mat-card-content>
                             </mat-card>

@@ -10,10 +10,16 @@ import { ResponseCardComponent } from './response-card/response-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatInputModule} from '@angular/material/input'; 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';  
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from 'ngx-mat-datetime-picker';
+import { NgxMatMomentModule } from 'ngx-mat-moment-adapter';
+import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +27,8 @@ import {MatListModule} from '@angular/material/list';
     PageNotFoundComponent,
     RequestListComponent,
     ResponseCardComponent,
-
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,11 +37,18 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
