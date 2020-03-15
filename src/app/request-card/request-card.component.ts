@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { RequestService } from './request.service';
+import { RequestModel } from './models/request.model';
+import { Router } from '@angular/router';
 interface HttpMethod {
   value: string;
   viewValue: string;
@@ -26,7 +28,7 @@ export class RequestCardComponent implements OnInit {
   headers: Header[] = [];
   selectedHttpMethod = 'get';
   url: String;
-  constructor(private requestService: RequestService) {
+  constructor(private requestService: RequestService, public router:Router) {
   }
   public date: moment.Moment;
   public disabled = false;
@@ -57,7 +59,15 @@ export class RequestCardComponent implements OnInit {
     this.picker.cancel();
   }
   send(){
-
+    let data = new RequestModel();
+    data.Headers = this.headers;
+    data.HttpMethod = this.selectedHttpMethod;
+    data.Date = this.date;
+    data.Context = this.source;
+    this.requestService.sendRequest(data).subscribe();
+  }
+  goToList(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
 }

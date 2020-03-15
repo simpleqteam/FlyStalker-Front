@@ -30,3 +30,16 @@ mat-list-item{
 .footer-elem{
     margin: 10px;
 }
+.content-area{
+    width: 100%;
+    margin: 5px;
+}
+.history-button{
+    margin-left: auto;
+
+}
+.task-panel{
+    z-index: 1000;
+    position: sticky;
+    bottom: 10px;
+}
