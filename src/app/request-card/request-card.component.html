@@ -3,6 +3,16 @@
         <mat-card-header>
             <div class="flex-header">
                 <div>
+                    <h1>{{'Request Builder'}}</h1>
+                </div>
+                <div class="history-button">
+                    <button mat-raised-button (click)="goToList('list')">History</button>
+                </div>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="flex-header">
+                <div>
                     <mat-form-field>
                         <mat-label>Http Method</mat-label>
                         <mat-select [(value)]="selectedHttpMethod">
@@ -19,8 +29,6 @@
                     </mat-form-field>
                 </div>
             </div>
-        </mat-card-header>
-        <mat-card-content>
             <mat-tab-group>
                 <mat-tab label="Headers">
                     <div>
@@ -49,7 +57,7 @@
                     <mat-form-field appearance="fill" class="content-area">
                         <mat-label>Content</mat-label>
                         <textarea matInput></textarea>
-                      </mat-form-field>
+                    </mat-form-field>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
@@ -67,11 +75,9 @@
                     </mat-form-field>
                 </div>
                 <div class="footer-elem">
-                    <button mat-raised-button color="success">Send</button>
+                    <button mat-raised-button color="success" (click)="send()">Send</button>
                 </div>
-                <div class="footer-elem history-button">
-                    <button mat-raised-button (click)="goToList('list')">History</button>
-                </div>
+
             </div>
         </mat-card-content>
     </mat-card>
