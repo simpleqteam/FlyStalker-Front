@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
+import { RequestInfoModel } from './models/request-info.model';
+import { ListHelperService } from './list-helper.service';
 
 @Component({
   selector: 'app-request-list',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestListComponent implements OnInit {
 
-  constructor() { }
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [10, 25, 100];
+  requestList: RequestInfoModel[];
+  constructor(private router: Router, private listHelperService: ListHelperService) { 
+    listHelperService.getCount().subscribe(n=>{
+      this.length=n;
+      listHelperService.getData(0,this.pageSize).subscribe(l=>this.requestList=l);
+    })
+  }
 
   ngOnInit(): void {
   }
-
+  goToRequest(){
+    this.router.navigate(['request']);
+  }
+  public getHistoryRequest(event?:PageEvent){
+    this.listHelperService.getData(event.pageIndex*event.pageSize,event.pageSize).subscribe(l=>this.requestList=l);
+  }
 }
