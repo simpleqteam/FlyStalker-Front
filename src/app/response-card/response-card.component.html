@@ -1,1 +1,19 @@
-<p>response-card works!</p>
+<div class="content center">
+    <div class="back-button">
+        <button class="to-r-button" mat-raised-button (click)="goToList()">Back</button>
+    </div>
+    <div class="center">
+        <div class="margin-5">
+            <div *ngIf="!responceInfo">
+                <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <div *ngIf="responceInfo">
+                <div>{{responceInfo.url}}</div>
+                <div>{{responceInfo.method}}</div>
+                <div>{{responceInfo.responce}}</div>
+                <div>{{responceInfo.content}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

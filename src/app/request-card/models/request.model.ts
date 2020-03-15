@@ -1,6 +1,6 @@
 export class RequestModel {
-    public HttpMethod:any;
-    public Headers:any;
-    public Date: any;
-    public Context: any;
+    public httpMethod:any;
+    public headers:any;
+    public date: any;
+    public content: any;
 }
