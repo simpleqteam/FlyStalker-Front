@@ -1,3 +1,4 @@
+
 mat-card{
     margin-left: 100px;
     margin-right: 100px;
@@ -48,4 +49,10 @@ mat-list-item{
     z-index: 1000;
     position: sticky;
     bottom: 10px;
+}
+.flex{
+    display: flex;
+}
+.child{
+    margin: auto;
 }

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { RequestService } from './request.service';
 import { RequestModel } from './models/request.model';
 import { Router } from '@angular/router';
+import { HighlightResult } from 'ngx-highlightjs';
 interface HttpMethod {
   value: string;
   viewValue: string;
@@ -20,11 +21,16 @@ class Header {
   styleUrls: ['./request-card.component.scss']
 })
 export class RequestCardComponent implements OnInit {
+  @ViewChild('editor') editor;
   source: string = '';
   methods: HttpMethod[] = [
     { value: 'get', viewValue: 'GET' },
     { value: 'post', viewValue: 'POST' },
   ];
+  code = `function myFunction() {
+    document.getElementById("demo1").innerHTML = "Hello there!";
+    document.getElementById("demo2").innerHTML = "How are you?";
+  }`
   headers: Header[] = [];
   selectedHttpMethod = 'get';
   url: String;
@@ -63,6 +69,26 @@ export class RequestCardComponent implements OnInit {
   }
   goToList(pageName:string){
     this.router.navigate([`${pageName}`]);
+  }
+  ngAfterViewInit() {
+
+    this.editor.getEditor().setOptions({
+      showLineNumbers: true,
+      tabSize: 2
+    });
+
+    this.editor.mode = 'javascript';
+    this.editor.value = `function testThis() {
+  console.log("it's working!")
+}`
+
+    this.editor.getEditor().commands.addCommand({
+      name: "showOtherCompletions",
+      bindKey: "Ctrl-.",
+      exec: function (editor) {
+
+      }
+    })
   }
 
 }

@@ -20,6 +20,17 @@ import { NgxMatMomentModule } from 'ngx-mat-moment-adapter';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { AceEditorModule } from 'ng2-ace-editor';
+
+export function getHighlightLanguages() {
+  return {
+    typescript: () => import('highlight.js/lib/languages/typescript'),
+    css: () => import('highlight.js/lib/languages/css'),
+    xml: () => import('highlight.js/lib/languages/xml'),
+    json: () => import('highlight.js/lib/languages/json'),
+  };
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +58,17 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     NgxMatMomentModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HighlightModule,
+    AceEditorModule
+  ],
+  providers:[
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        languages: getHighlightLanguages()
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

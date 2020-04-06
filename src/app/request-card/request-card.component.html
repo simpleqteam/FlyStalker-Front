@@ -1,4 +1,5 @@
 <div class="main-content">
+
     <mat-card>
         <mat-card-header>
             <div class="flex-header">
@@ -54,10 +55,8 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Content">
-                    <mat-form-field appearance="fill" class="content-area">
-                        <mat-label>Content</mat-label>
-                        <textarea matInput [(ngModel)]="source"></textarea>
-                    </mat-form-field>
+                    <ace-editor #editor style="height:150px;">
+                    </ace-editor>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
