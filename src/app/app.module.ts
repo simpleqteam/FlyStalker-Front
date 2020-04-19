@@ -8,13 +8,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RequestListComponent } from './request-list/request-list.component';
 import { ResponseCardComponent } from './response-card/response-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSelectModule} from '@angular/material/select'; 
-import {MatInputModule} from '@angular/material/input'; 
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
-import {MatListModule} from '@angular/material/list';  
+import {MatListModule} from '@angular/material/list';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from 'ngx-mat-datetime-picker';
 import { NgxMatMomentModule } from 'ngx-mat-moment-adapter';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +22,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { AceEditorModule } from 'ng2-ace-editor';
+
+import { AppConfigModule } from './app-config.module';
 
 export function getHighlightLanguages() {
   return {
@@ -41,6 +43,7 @@ export function getHighlightLanguages() {
   ],
 
   imports: [
+    AppConfigModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
