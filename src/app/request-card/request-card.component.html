@@ -16,7 +16,7 @@
                 <div>
                     <mat-form-field>
                         <mat-label>Http Method</mat-label>
-                        <mat-select [(value)]="selectedHttpMethod">
+                        <mat-select [(value)]="requestMethodModel">
                             <mat-option *ngFor="let method of methods" [value]="method.value">
                                 {{method.viewValue}}
                             </mat-option>
@@ -26,7 +26,14 @@
                 <div>
                     <mat-form-field class="url-full-width" hideRequiredMarker>
                         <mat-label>URL</mat-label>
-                        <input matInput type="text" [(ngModel)]="url" required placeholder="https://www.google.ru/">
+                        <input
+                          matInput
+                          type="text"
+                          [(ngModel)]="hostAndPathModel"
+                          pattern="(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+"
+                          required
+                          placeholder="https://www.google.ru/"
+                        >
                     </mat-form-field>
                 </div>
             </div>
@@ -34,7 +41,7 @@
                 <mat-tab label="Headers">
                     <div>
                         <mat-list>
-                            <mat-list-item *ngFor="let header of headers">
+                            <mat-list-item *ngFor="let header of headersModel">
 
                                 <mat-form-field class="header-elem">
                                     <mat-label>KEY</mat-label>
