@@ -109,7 +109,6 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
       tabSize: 2
     });
 
-    this.editor.mode = 'xml';
   }
 
 }
