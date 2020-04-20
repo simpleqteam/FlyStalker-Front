@@ -21,7 +21,25 @@ mat-list-item{
         color: #f0fff3;
         background-color: #22bb33;
 }
+mat-select {
+    width: fit-content !important;
+    min-width: 100%;
+}
 
+::ng-deep .mat-form-field-infix {
+    min-width: 50px !important;
+    width: fit-content !important;
+}
+
+::ng-deep mat-select .mat-select-value {
+    width: fit-content;
+    min-width: 2ch;
+    max-width: 25ch;
+}
+::ng-deep mat-select .mat-select-placeholder {
+    width: fit-content;
+    min-width: 10ch;
+}
 
 .flex-header{
     display: flex;
@@ -55,4 +73,9 @@ mat-list-item{
 }
 .child{
     margin: auto;
+}
+
+.url-container{
+    width: 100%;
+    margin-right: 1%;
 }

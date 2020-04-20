@@ -48,6 +48,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   hostAndPathModel: string;
   headersModel: Header[] = [];
   selectedHighLight = 'xml';
+  isSendNow:boolean;
 
   constructor(private requestService: RequestService, public router: Router) {
   }

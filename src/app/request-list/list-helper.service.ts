@@ -14,6 +14,6 @@ export class ListHelperService {
     return this.httpClient.get<number>('url');
   }
   getData(skip: number, take:number):Observable<RequestInfoModel[]>{
-    return this.httpClient.post<RequestInfoModel[]>('url',{skip:skip,take:take});
+    return this.httpClient.post<RequestInfoModel[]>('url',{pageNumber:skip,pageSize:take});
   }
 }

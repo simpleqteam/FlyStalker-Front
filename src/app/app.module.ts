@@ -23,7 +23,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { AceEditorModule } from 'ng2-ace-editor';
 import 'ace-builds/webpack-resolver';
-
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { AppConfigModule } from './app-config.module';
 
 export function getHighlightLanguages() {
@@ -44,6 +44,7 @@ export function getHighlightLanguages() {
   ],
 
   imports: [
+    MatCheckboxModule,
     AppConfigModule,
     BrowserModule,
     AppRoutingModule,
