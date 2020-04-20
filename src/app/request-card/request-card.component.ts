@@ -1,15 +1,18 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import {RequestService} from './request.service';
-import {ExchangeCreationModel, HttpMethod} from './models/exchangeCreationModel';
-import {Router} from '@angular/router';
+import { RequestService } from './request.service';
+import { ExchangeCreationModel, HttpMethod } from './models/exchangeCreationModel';
+import { Router } from '@angular/router';
 
 interface HttpMethodModel {
   value: HttpMethod;
   viewValue: string;
 }
-
+interface ModeType{
+  name: string;
+  value: string;
+}
 class Header {
   key: string;
   value: string;
@@ -17,13 +20,21 @@ class Header {
 }
 
 const METHODS: HttpMethodModel[] = [
-  {value: HttpMethod.GET, viewValue: 'GET'},
-  {value: HttpMethod.POST, viewValue: 'POST'},
-  {value: HttpMethod.PATCH, viewValue: 'PATCH'},
-  {value: HttpMethod.PUT, viewValue: 'PUT'},
-  {value: HttpMethod.DELETE, viewValue: 'DELETE'},
-  {value: HttpMethod.OPTIONS, viewValue: 'OPTIONS'},
+  { value: HttpMethod.GET, viewValue: 'GET' },
+  { value: HttpMethod.POST, viewValue: 'POST' },
+  { value: HttpMethod.PATCH, viewValue: 'PATCH' },
+  { value: HttpMethod.PUT, viewValue: 'PUT' },
+  { value: HttpMethod.DELETE, viewValue: 'DELETE' },
+  { value: HttpMethod.OPTIONS, viewValue: 'OPTIONS' },
 ];
+
+const HIGHLIGHTS: ModeType[] = [
+  {name:'XML',value:'xml'},
+  {name:'JSON',value:'json'},
+  {name:'TEXT',value:'text'},
+  {name:'JS',value:'javascript'},
+  {name:'HTML',value:'html'},
+]
 
 @Component({
   selector: 'app-request-card',
@@ -32,15 +43,11 @@ const METHODS: HttpMethodModel[] = [
 })
 export class RequestCardComponent implements OnInit, AfterViewInit {
   methods = METHODS;
-
+  hightlights = HIGHLIGHTS;
   requestMethodModel: HttpMethod = HttpMethod.GET;
   hostAndPathModel: string;
   headersModel: Header[] = [];
-
-  code = `function myFunction() {
-    document.getElementById("demo1").innerHTML = "Hello there!";
-    document.getElementById("demo2").innerHTML = "How are you?";
-  }`;
+  selectedHighLight = 'xml';
 
   constructor(private requestService: RequestService, public router: Router) {
   }
@@ -70,6 +77,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   closePicker() {
     this.picker.cancel();
   }
+  
 
   send() {
     this.requestService
@@ -101,18 +109,8 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
       tabSize: 2
     });
 
-    this.editor.mode = 'javascript';
-    this.editor.value = `function testThis() {
-  console.log("it's working!")
-}`
-//
-//     this.editor.getEditor().commands.addCommand({
-//       name: "showOtherCompletions",
-//       bindKey: "Ctrl-.",
-//       exec: function (editor) {
-//
-//       }
-//     })
+    this.editor.mode = 'xml';
   }
 
 }
+
