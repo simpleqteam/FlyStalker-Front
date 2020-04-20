@@ -1,14 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import  {RequestModel} from './models/request.model'
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ExchangeCreationModel} from './models/exchangeCreationModel';
+import {APP_CONFIG_INJECTION_TOKEN, AppConfig} from '../app-config.module';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
+  constructor(
+    @Inject(APP_CONFIG_INJECTION_TOKEN) private config: AppConfig,
+    private httpClient: HttpClient
+  ) {
+  }
 
-  constructor(private httpClient: HttpClient) { }
-  sendRequest(requestData:RequestModel):Observable<string>{
-    return this.httpClient.post<string>('url',requestData);
+  sendRequest(exchangeCreationModel: ExchangeCreationModel): Observable<string> {
+    return this.httpClient.post<string>(`${this.config.apiUrl}/exchanges`, exchangeCreationModel);
   }
 }
