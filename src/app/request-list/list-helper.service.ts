@@ -17,6 +17,6 @@ export class ListHelperService {
   getData(skip: number, take:number):Observable<RequestInfoModel[]>{
 
     let params = new HttpParams().set('pageNumber',skip.toString()).set('pageSize',take.toString());
-    return this.httpClient.get<RequestInfoModel[]>(`${this.config.apiUrl}/search`,{params:params} );
+    return this.httpClient.get<RequestInfoModel[]>(`${this.config.apiUrl}/exchanges`,{params:params} );
   }
 }
