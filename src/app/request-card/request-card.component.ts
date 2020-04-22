@@ -9,7 +9,7 @@ interface HttpMethodModel {
   value: HttpMethod;
   viewValue: string;
 }
-interface ModeType{
+interface ModeType {
   name: string;
   value: string;
 }
@@ -18,7 +18,11 @@ class Header {
   value: string;
   index: number;
 }
-
+class Param {
+  key: string;
+  value: string;
+  index: number;
+}
 const METHODS: HttpMethodModel[] = [
   { value: HttpMethod.GET, viewValue: 'GET' },
   { value: HttpMethod.POST, viewValue: 'POST' },
@@ -29,11 +33,11 @@ const METHODS: HttpMethodModel[] = [
 ];
 
 const HIGHLIGHTS: ModeType[] = [
-  {name:'XML',value:'xml'},
-  {name:'JSON',value:'json'},
-  {name:'TEXT',value:'text'},
-  {name:'JS',value:'javascript'},
-  {name:'HTML',value:'html'},
+  { name: 'XML', value: 'xml' },
+  { name: 'JSON', value: 'json' },
+  { name: 'TEXT', value: 'text' },
+  { name: 'JS', value: 'javascript' },
+  { name: 'HTML', value: 'html' },
 ]
 
 @Component({
@@ -47,7 +51,9 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   requestMethodModel: HttpMethod = HttpMethod.GET;
   hostAndPathModel: string;
   headersModel: Header[] = [];
+  paramsModel: Param[] = [];
   selectedHighLight = 'xml';
+  isSendNow: boolean;
 
   constructor(private requestService: RequestService, public router: Router) {
   }
@@ -69,7 +75,9 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   deleteHeader(index: number): void {
     this.headersModel.splice(index, 1);
   }
-
+  deleteParam(index: number): void {
+    this.paramsModel.splice(index, 1);
+  }
   ngOnInit() {
 
   }
@@ -77,7 +85,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   closePicker() {
     this.picker.cancel();
   }
-  
+
 
   send() {
     this.requestService
@@ -87,7 +95,8 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
           this.hostAndPathModel,
           this.headersModelToMap(this.headersModel),
           this.dateControl.value,
-          this.editor.value
+          this.editor.value,
+          this.paramsModelToMap(this.paramsModel)
         )
       ).subscribe();
   }
@@ -97,7 +106,11 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
     this.headersModel.forEach(it => headersMap[it.key] = it.value);
     return headersMap;
   }
-
+  private paramsModelToMap(headersModel: Param[]): { [key: string]: string } {
+    const paramsMap: { [key: string]: string } = {};
+    this.headersModel.forEach(it => paramsMap[it.key] = it.value);
+    return paramsMap;
+  }
   goToList(pageName: string) {
     this.router.navigate([`${pageName}`]);
   }

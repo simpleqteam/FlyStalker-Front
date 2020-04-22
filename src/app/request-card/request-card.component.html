@@ -1,5 +1,5 @@
 <div class="main-content">
-
+    
     <mat-card>
         <mat-card-header>
             <div class="flex-header">
@@ -23,7 +23,7 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div>
+                <div class="url-container">
                     <mat-form-field class="url-full-width" hideRequiredMarker>
                         <mat-label>URL</mat-label>
                         <input matInput type="text" [(ngModel)]="hostAndPathModel"
@@ -56,7 +56,7 @@
                         <button class="add_header" mat-raised-button (click)="addHeader()">Add Header</button>
                     </div>
                 </mat-tab>
-                <mat-tab label="Content">
+                <mat-tab label="Body">
                     <div>
                         <mat-form-field>
                             <mat-select [(value)]="selectedHighLight">
@@ -71,6 +71,29 @@
                         </ace-editor>
                     </div>
                 </mat-tab>
+                <mat-tab label="Params">
+                    <div>
+                        <mat-list>
+                            <mat-list-item *ngFor="let param of paramsModel">
+
+                                <mat-form-field class="header-elem">
+                                    <mat-label>KEY</mat-label>
+                                    <input matInput type="text" [(ngModel)]="param.key" placeholder="key">
+                                </mat-form-field>
+
+                                <mat-form-field class="header-elem">
+                                    <mat-label>VALUE</mat-label>
+                                    <input matInput type="text" [(ngModel)]="param.value" placeholder="value">
+                                </mat-form-field>
+
+                                <button class="header-elem" mat-raised-button color="warn"
+                                    (click)="deleteParam(param.index)">Delete</button>
+
+                            </mat-list-item>
+                        </mat-list>
+                        <button class="add_header" mat-raised-button (click)="addHeader()">Add Header</button>
+                    </div>
+                </mat-tab>
             </mat-tab-group>
         </mat-card-content>
 
@@ -79,6 +102,9 @@
         <mat-card-content>
             <div class="flex-footer">
                 <div class="footer-elem">
+                    <mat-checkbox color="primary" [(ngModel)]="isSendNow">Send Now</mat-checkbox>
+                </div>
+                <div class="footer-elem" [hidden]="isSendNow">
                     <mat-form-field>
                         <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
                             [formControl]="dateControl">

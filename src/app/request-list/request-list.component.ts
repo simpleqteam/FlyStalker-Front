@@ -15,22 +15,23 @@ export class RequestListComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions: number[] = [10, 25, 100];
   requestList: RequestInfoModel[];
-  constructor(private router: Router, private listHelperService: ListHelperService) { 
-    listHelperService.getCount().subscribe(n=>{
-      this.length=n;
-      listHelperService.getData(0,this.pageSize).subscribe(l=>this.requestList=l);
+  constructor(private router: Router, private listHelperService: ListHelperService) {
+    listHelperService.getCount().subscribe(n => {
+      this.length = n;
+      listHelperService.getData(0, this.pageSize).subscribe(l => this.requestList = l);
     })
   }
 
   ngOnInit(): void {
   }
-  goToRequest(){
+  goToRequest() {
     this.router.navigate(['request']);
   }
-  getHistoryRequest(event?:PageEvent){
-    this.listHelperService.getData(event.pageIndex*event.pageSize,event.pageSize).subscribe(l=>this.requestList=l);
+  getHistoryRequest(event?: PageEvent) {
+    this.listHelperService.getData(event.pageIndex, event.pageSize).subscribe(l => this.requestList = l);
   }
-  goToInfo(id: number){
-    this.router.navigate([`response?id=${id}`]);
+  goToInfo(id: string) {
+    let elem = this.requestList.find(r => r.UUID.localeCompare(id));
+    elem.IsFullInfo != elem.IsFullInfo;
   }
 }
