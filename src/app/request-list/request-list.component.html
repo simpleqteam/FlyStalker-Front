@@ -14,11 +14,14 @@
                             <mat-card>
                                 <mat-card-content>
                                     <div>
-                                        <div>{{elem.HttpMethod}}</div>
-                                        <div>{{elem.RequestCode}}</div>
-                                        <div>{{elem.Url}}</div>
+                                        <div>{{elem.RequestSpec.Method}}</div>
+                                        <div>{{elem.RequestSpec.HostAndPath}}</div>
+                                        <div>{{elem.RequestSpec.CreationDateTime}}</div>
                                         <div>
-                                            <button mat-raised-button (click)="goToInfo(elem.Id)">Info</button>
+                                            <button mat-raised-button (click)="goToInfo(elem.UUID)">Info</button>
+                                        </div>
+                                        <div *ngIf="elem.IsFullInfo">
+                                            {{'Here u can find full info'}}
                                         </div>
                                     </div>
                                 </mat-card-content>
