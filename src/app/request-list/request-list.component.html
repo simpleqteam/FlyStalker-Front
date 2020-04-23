@@ -21,7 +21,9 @@
                                             <button mat-raised-button (click)="goToInfo(elem.UUID)">Info</button>
                                         </div>
                                         <div *ngIf="elem.IsFullInfo">
-                                            {{'Here u can find full info'}}
+                                            <div>{{elem.RequestInfoModel.UUID</div>
+                                            <div>{{elem.RequestInfoModel.RequestSpec}}</div>
+                                            <div>{{elem.RequestInfoModel.ReqponceDescription}}</div>
                                         </div>
                                     </div>
                                 </mat-card-content>
