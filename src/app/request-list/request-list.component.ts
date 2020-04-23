@@ -12,13 +12,17 @@ import { ListHelperService } from './list-helper.service';
 export class RequestListComponent implements OnInit {
 
   length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [10, 25, 100];
+  pageSize = 5;
+  pageSizeOptions: number[] = [5,10, 25, 100];
   requestList: RequestInfoModel[];
   constructor(private router: Router, private listHelperService: ListHelperService) {
     listHelperService.getCount().subscribe(n => {
       this.length = n;
-      listHelperService.getData(0, this.pageSize).subscribe(l => this.requestList = l);
+      listHelperService.getData(0, this.pageSize).subscribe(
+        l => {
+        this.requestList = l;
+        let i = 7;
+        });
     })
   }
 
@@ -31,7 +35,8 @@ export class RequestListComponent implements OnInit {
     this.listHelperService.getData(event.pageIndex, event.pageSize).subscribe(l => this.requestList = l);
   }
   goToInfo(id: string) {
-    let elem = this.requestList.find(r => r.UUID.localeCompare(id));
-    elem.IsFullInfo != elem.IsFullInfo;
+    let elem = this.requestList.find(r => r.uuid === id);
+    if(elem.IsFullInfo == undefined  || !elem.IsFullInfo) elem.IsFullInfo = true;
+    else elem.IsFullInfo = false;
   }
 }

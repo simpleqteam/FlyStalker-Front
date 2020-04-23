@@ -9,27 +9,64 @@
             </div>
             <div *ngIf="requestList">
                 <div>
-                    <mat-list>
-                        <mat-list-item *ngFor="let elem of requestList">
-                            <mat-card>
-                                <mat-card-content>
-                                    <div>
-                                        <div>{{elem.RequestSpec.Method}}</div>
-                                        <div>{{elem.RequestSpec.HostAndPath}}</div>
-                                        <div>{{elem.RequestSpec.CreationDateTime}}</div>
-                                        <div>
-                                            <button mat-raised-button (click)="goToInfo(elem.UUID)">Info</button>
-                                        </div>
-                                        <div *ngIf="elem.IsFullInfo">
-                                            <div>{{elem.RequestInfoModel.UUID</div>
-                                            <div>{{elem.RequestInfoModel.RequestSpec}}</div>
-                                            <div>{{elem.RequestInfoModel.ReqponceDescription}}</div>
-                                        </div>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                        </mat-list-item>
-                    </mat-list>
+                    <mat-card *ngFor="let elem of requestList">
+                        <mat-card-content>
+                            <div>
+                                <div class="flex">
+                                    <div>{{elem.requestSpec.method}}</div>
+                                    <div class="url">{{elem.requestSpec.hostAndPath}}</div>
+                                </div>
+                                <div>{{elem.requestSpec.creationDateTime | date}}</div>
+                                <div *ngIf="elem.IsFullInfo">
+                                    <mat-tab-group>
+                                        <mat-tab label="Request">
+                                            <div>{{elem.requestSpec.creationDateTime}}</div>
+                                            <div *ngIf="elem.requestSpec.body">
+                                                <div>{{'Body:'}}</div>
+                                                <div class="text">{{elem.requestSpec.body}}</div>
+                                            </div>
+                                            <div *ngIf="elem.requestSpec.headers.length > 0">
+                                                headers:
+                                                <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+                                                    <div *cdkVirtualFor="let h of elem.requestSpec.headers" class="example-item">
+                                                        <div class="flex">
+                                                            <div>{{h.name}}</div>
+                                                            <div class="text">{{h.value}}</div>
+                                                        </div>
+                                                    </div>
+                                                </cdk-virtual-scroll-viewport>
+                                            </div>
+                                            <div *ngIf="elem.requestSpec.queryParams.length > 0">
+                                                params:
+                                                <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+                                                    <div *cdkVirtualFor="let h of elem.requestSpec.queryParams" class="example-item">
+                                                        <div class="flex">
+                                                            <div>{{h.name}}</div>
+                                                            <div class="flex">
+                                                                <div class="text" *ngFor="let t of h.values">{{t}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </cdk-virtual-scroll-viewport>
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Responce">
+                                            <div *ngIf="elem.responseDescription">
+                                                <div>{{'Responce Info:'}}</div>
+                                                <div>{{elem.responseDescription.statusCode}}</div>
+                                                <div>{{elem.responseDescription.body}}</div>
+                                            </div>
+
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                </div>
+                                <div class="info-b">
+                                    <button class="info-b" mat-raised-button (click)="goToInfo(elem.uuid)">Info</button>
+                                </div>
+
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
                 <div>
                     <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
