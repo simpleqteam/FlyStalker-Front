@@ -14,12 +14,12 @@ interface ModeType {
   value: string;
 }
 class Header {
-  key: string;
+  name: string;
   value: string;
   index: number;
 }
 class Param {
-  key: string;
+  name: string;
   value: string;
   index: number;
 }
@@ -71,7 +71,11 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
     h.index = this.headersModel.length;
     this.headersModel.push(h);
   }
-
+  addParam(): void {
+    let p = new Param();
+    p.index = this.paramsModel.length;
+    this.paramsModel.push(p);
+  }
   deleteHeader(index: number): void {
     this.headersModel.splice(index, 1);
   }
@@ -93,24 +97,15 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
         new ExchangeCreationModel(
           this.requestMethodModel,
           this.hostAndPathModel,
-          this.headersModelToMap(this.headersModel),
+          this.headersModel,
           this.dateControl.value,
           this.editor.value,
-          this.paramsModelToMap(this.paramsModel)
+          this.paramsModel
         )
       ).subscribe();
   }
 
-  private headersModelToMap(headersModel: Header[]): { [key: string]: string } {
-    const headersMap: { [key: string]: string } = {};
-    this.headersModel.forEach(it => headersMap[it.key] = it.value);
-    return headersMap;
-  }
-  private paramsModelToMap(headersModel: Param[]): { [key: string]: string } {
-    const paramsMap: { [key: string]: string } = {};
-    this.headersModel.forEach(it => paramsMap[it.key] = it.value);
-    return paramsMap;
-  }
+
   goToList(pageName: string) {
     this.router.navigate([`${pageName}`]);
   }

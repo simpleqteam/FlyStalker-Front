@@ -25,6 +25,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
 import 'ace-builds/webpack-resolver';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { AppConfigModule } from './app-config.module';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 export function getHighlightLanguages() {
   return {
@@ -65,7 +66,8 @@ export function getHighlightLanguages() {
     MatProgressSpinnerModule,
     MatPaginatorModule,
     HighlightModule,
-    AceEditorModule
+    AceEditorModule,
+    ScrollingModule
   ],
   providers:[
     {

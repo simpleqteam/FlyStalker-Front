@@ -40,7 +40,7 @@
 
                                 <mat-form-field class="header-elem">
                                     <mat-label>KEY</mat-label>
-                                    <input matInput type="text" [(ngModel)]="header.key" placeholder="key">
+                                    <input matInput type="text" [(ngModel)]="header.name" placeholder="key">
                                 </mat-form-field>
 
                                 <mat-form-field class="header-elem">
@@ -78,7 +78,7 @@
 
                                 <mat-form-field class="header-elem">
                                     <mat-label>KEY</mat-label>
-                                    <input matInput type="text" [(ngModel)]="param.key" placeholder="key">
+                                    <input matInput type="text" [(ngModel)]="param.name" placeholder="key">
                                 </mat-form-field>
 
                                 <mat-form-field class="header-elem">
@@ -91,7 +91,7 @@
 
                             </mat-list-item>
                         </mat-list>
-                        <button class="add_header" mat-raised-button (click)="addHeader()">Add Header</button>
+                        <button class="add_header" mat-raised-button (click)="addParam()">Add Param</button>
                     </div>
                 </mat-tab>
             </mat-tab-group>
