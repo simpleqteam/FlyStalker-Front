@@ -26,6 +26,7 @@ import 'ace-builds/webpack-resolver';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { AppConfigModule } from './app-config.module';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 export function getHighlightLanguages() {
   return {
@@ -67,7 +68,8 @@ export function getHighlightLanguages() {
     MatPaginatorModule,
     HighlightModule,
     AceEditorModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSnackBarModule
   ],
   providers:[
     {

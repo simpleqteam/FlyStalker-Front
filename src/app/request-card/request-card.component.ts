@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { RequestService } from './request.service';
 import { ExchangeCreationModel, HttpMethod } from './models/exchangeCreationModel';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface HttpMethodModel {
   value: HttpMethod;
@@ -59,7 +60,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   isSendNow: boolean;
 
 
-  constructor(private requestService: RequestService, public router: Router) {
+  constructor(private requestService: RequestService, public router: Router, private snackBar: MatSnackBar) {
   }
 
   get hostAndPath() {
@@ -128,7 +129,17 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
           this.requestMethodModel == HttpMethod.GET ? null : this.text,
           this.paramsModel
         )
-      ).subscribe();
+      ).subscribe(
+        success => {
+          this.snackBar.open("Success", 'To History', { duration: 2000 }).onAction().subscribe(() => {
+            this.goToList('list')
+          })
+        },
+        err => {
+          this.snackBar.open("Something was wrong", '', { duration: 2000 });
+          console.log(err);
+        }
+      );
   }
 
   goToList(pageName: string) {
