@@ -60,7 +60,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   isSendNow: boolean;
 
 
-  constructor(private requestService: RequestService, public router: Router, private snakcBar: MatSnackBar) {
+  constructor(private requestService: RequestService, public router: Router, private snackBar: MatSnackBar) {
   }
 
   get hostAndPath() {
@@ -135,12 +135,12 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
         )
       ).subscribe(
         success => {
-          this.snakcBar.open("Success", 'To History', { duration: 2000 }).onAction().subscribe(() => {
+          this.snackBar.open("Success", 'To History', { duration: 2000 }).onAction().subscribe(() => {
             this.goToList('list')
           })
         },
         err => {
-          this.snakcBar.open("Thomething was wrong", '', { duration: 2000 });
+          this.snackBar.open("Thomething was wrong", '', { duration: 2000 });
           console.log(err);
         }
       );
