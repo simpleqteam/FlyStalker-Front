@@ -38,7 +38,7 @@ const HIGHLIGHTS: ModeType[] = [
   { name: 'TEXT', value: 'text' },
   { name: 'JS', value: 'javascript' },
   { name: 'HTML', value: 'html' },
-]
+];
 
 @Component({
   selector: 'app-request-card',
@@ -48,7 +48,7 @@ const HIGHLIGHTS: ModeType[] = [
 export class RequestCardComponent implements OnInit, AfterViewInit {
   methods = METHODS;
   hightlights = HIGHLIGHTS;
-  text:string;
+  text: string;
   showLineNumbers: true;
 
   requestMethodModel: HttpMethod = HttpMethod.GET;
@@ -64,31 +64,30 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
 
   get hostAndPath() {
     if (this.paramsModel.length > 0) {
-      let hp = this.hostAndPathModel + '?';
-      return this.paramsModel.reduce((a, c) => c.name && c.value ? `${a}${c.name}=${c.value}&` : a, hp).slice(0, -1);
+      const base = this.hostAndPathModel + '?';
+      return this.paramsModel
+        .reduce((a, c) => c.name && c.value ? `${a}${c.name}=${c.value}&` : a, base)
+        .slice(0, -1);
     }
     return this.hostAndPathModel;
   }
 
   set hostAndPath(value: string) {
-    let url = new URL(value);
     if (value && value.includes('?')) {
+      const url = new URL(value);
+      this.hostAndPathModel = value.substr(0, value.indexOf('?'));
       this.paramsModel = [];
       url.searchParams.forEach((v, k) => {
-        let param = new Param();
+        const param = new Param();
         param.index = this.paramsModel.length;
         param.value = v;
         param.name = k;
         this.paramsModel.push(param);
-      })
-
-    }
-    else {
+      });
+    } else {
       this.paramsModel = [];
+      this.hostAndPathModel = value;
     }
-    this.hostAndPathModel = url.origin + url.pathname;
-
-
   }
 
   public disabled = false;
@@ -114,12 +113,9 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
     let pos = this.paramsModel.findIndex(p => p.index == index)
     this.paramsModel.splice(pos, 1);
   }
-  ngOnInit() {
 
-  }
-
-
-
+  ngOnInit() {}
+  ngAfterViewInit() {}
 
   send() {
     this.requestService
@@ -135,14 +131,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
       ).subscribe();
   }
 
-
   goToList(pageName: string) {
     this.router.navigate([`${pageName}`]);
   }
-
-  ngAfterViewInit() {
-
-  }
-
 }
-
