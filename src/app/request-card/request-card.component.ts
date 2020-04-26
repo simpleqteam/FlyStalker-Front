@@ -140,7 +140,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
           })
         },
         err => {
-          this.snackBar.open("Thomething was wrong", '', { duration: 2000 });
+          this.snackBar.open("Something was wrong", '', { duration: 2000 });
           console.log(err);
         }
       );
