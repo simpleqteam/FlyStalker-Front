@@ -26,13 +26,36 @@
                 <div class="url-container">
                     <mat-form-field class="url-full-width" hideRequiredMarker>
                         <mat-label>URL</mat-label>
-                        <input matInput type="text" [(ngModel)]="hostAndPathModel"
+                        <input matInput type="text" [(ngModel)]="hostAndPath"
                             pattern="(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+"
                             required placeholder="https://www.google.ru/">
                     </mat-form-field>
                 </div>
             </div>
             <mat-tab-group>
+                <mat-tab label="Parametrs">
+                    <div>
+                        <mat-list>
+                            <mat-list-item *ngFor="let param of paramsModel">
+
+                                <mat-form-field class="header-elem">
+                                    <mat-label>KEY</mat-label>
+                                    <input matInput type="text" [(ngModel)]="param.name" placeholder="key">
+                                </mat-form-field>
+
+                                <mat-form-field class="header-elem">
+                                    <mat-label>VALUE</mat-label>
+                                    <input matInput type="text" [(ngModel)]="param.value" placeholder="value">
+                                </mat-form-field>
+
+                                <button class="header-elem" mat-raised-button color="warn"
+                                    (click)="deleteParam(param.index)">Delete</button>
+
+                            </mat-list-item>
+                        </mat-list>
+                        <button class="add_header" mat-raised-button (click)="addParam()">Add Param</button>
+                    </div>
+                </mat-tab>
                 <mat-tab label="Headers">
                     <div>
                         <mat-list>
@@ -56,7 +79,7 @@
                         <button class="add_header" mat-raised-button (click)="addHeader()">Add Header</button>
                     </div>
                 </mat-tab>
-                <mat-tab label="Body">
+                <mat-tab label="Body" *ngIf="requestMethodModel != 0">
                     <div>
                         <mat-form-field>
                             <mat-select [(value)]="selectedHighLight">
@@ -67,33 +90,11 @@
                         </mat-form-field>
                     </div>
                     <div>
-                        <ace-editor #editor style="height:150px;" theme="ace/theme/chrome" [(mode)]="selectedHighLight">
+                        <ace-editor #editor  [(ngModel)]="text" showLineNumbers="showLineNumbers" style="height:150px;" theme="ace/theme/chrome" [(mode)]="selectedHighLight">
                         </ace-editor>
                     </div>
                 </mat-tab>
-                <mat-tab label="Params">
-                    <div>
-                        <mat-list>
-                            <mat-list-item *ngFor="let param of paramsModel">
-
-                                <mat-form-field class="header-elem">
-                                    <mat-label>KEY</mat-label>
-                                    <input matInput type="text" [(ngModel)]="param.name" placeholder="key">
-                                </mat-form-field>
-
-                                <mat-form-field class="header-elem">
-                                    <mat-label>VALUE</mat-label>
-                                    <input matInput type="text" [(ngModel)]="param.value" placeholder="value">
-                                </mat-form-field>
-
-                                <button class="header-elem" mat-raised-button color="warn"
-                                    (click)="deleteParam(param.index)">Delete</button>
-
-                            </mat-list-item>
-                        </mat-list>
-                        <button class="add_header" mat-raised-button (click)="addParam()">Add Param</button>
-                    </div>
-                </mat-tab>
+               
             </mat-tab-group>
         </mat-card-content>
 

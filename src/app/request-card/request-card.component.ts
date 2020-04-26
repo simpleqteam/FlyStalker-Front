@@ -48,6 +48,9 @@ const HIGHLIGHTS: ModeType[] = [
 export class RequestCardComponent implements OnInit, AfterViewInit {
   methods = METHODS;
   hightlights = HIGHLIGHTS;
+  text:string;
+  showLineNumbers: true;
+
   requestMethodModel: HttpMethod = HttpMethod.GET;
   hostAndPathModel: string;
   headersModel: Header[] = [];
@@ -55,7 +58,37 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   selectedHighLight = 'xml';
   isSendNow: boolean;
 
+
   constructor(private requestService: RequestService, public router: Router) {
+  }
+
+  get hostAndPath() {
+    if (this.paramsModel.length > 0) {
+      let hp = this.hostAndPathModel + '?';
+      return this.paramsModel.reduce((a, c) => c.name && c.value ? `${a}${c.name}=${c.value}&` : a, hp).slice(0, -1);
+    }
+    return this.hostAndPathModel;
+  }
+
+  set hostAndPath(value: string) {
+    let url = new URL(value);
+    if (value && value.includes('?')) {
+      this.paramsModel = [];
+      url.searchParams.forEach((v, k) => {
+        let param = new Param();
+        param.index = this.paramsModel.length;
+        param.value = v;
+        param.name = k;
+        this.paramsModel.push(param);
+      })
+
+    }
+    else {
+      this.paramsModel = [];
+    }
+    this.hostAndPathModel = url.origin + url.pathname;
+
+
   }
 
   public disabled = false;
@@ -63,8 +96,6 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   public disableSecond = true;
   public dateControl = new FormControl(moment());
 
-  @ViewChild('picker') picker: any;
-  @ViewChild('editor') editor;
 
   addHeader(): void {
     let h = new Header();
@@ -80,15 +111,14 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
     this.headersModel.splice(index, 1);
   }
   deleteParam(index: number): void {
-    this.paramsModel.splice(index, 1);
+    let pos = this.paramsModel.findIndex(p => p.index == index)
+    this.paramsModel.splice(pos, 1);
   }
   ngOnInit() {
 
   }
 
-  closePicker() {
-    this.picker.cancel();
-  }
+
 
 
   send() {
@@ -99,7 +129,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
           this.hostAndPathModel,
           this.headersModel,
           this.dateControl.value,
-          this.editor.value,
+          this.requestMethodModel == HttpMethod.GET ? null : this.text,
           this.paramsModel
         )
       ).subscribe();
@@ -111,11 +141,6 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
-    this.editor.getEditor().setOptions({
-      showLineNumbers: true,
-      tabSize: 2
-    });
 
   }
 
