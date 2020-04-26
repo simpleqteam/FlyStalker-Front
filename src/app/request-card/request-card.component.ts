@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { RequestService } from './request.service';
 import { ExchangeCreationModel, HttpMethod } from './models/exchangeCreationModel';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface HttpMethodModel {
   value: HttpMethod;
@@ -49,7 +49,7 @@ const HIGHLIGHTS: ModeType[] = [
 export class RequestCardComponent implements OnInit, AfterViewInit {
   methods = METHODS;
   hightlights = HIGHLIGHTS;
-  text:string;
+  text: string;
   showLineNumbers: true;
 
   requestMethodModel: HttpMethod = HttpMethod.GET;
@@ -60,7 +60,7 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
   isSendNow: boolean;
 
 
-  constructor(private requestService: RequestService, public router: Router, private snakcBar:MatSnackBar) {
+  constructor(private requestService: RequestService, public router: Router, private snakcBar: MatSnackBar) {
   }
 
   get hostAndPath() {
@@ -134,13 +134,13 @@ export class RequestCardComponent implements OnInit, AfterViewInit {
           this.paramsModel
         )
       ).subscribe(
-        success =>{
-          this.snakcBar.open("Success",'To History',{duration:2000}).onAction().subscribe(()=>{
+        success => {
+          this.snakcBar.open("Success", 'To History', { duration: 2000 }).onAction().subscribe(() => {
             this.goToList('list')
           })
         },
-        err =>{
-          this.snakcBar.open("Thomething was wrong",'',{ duration:2000});
+        err => {
+          this.snakcBar.open("Thomething was wrong", '', { duration: 2000 });
           console.log(err);
         }
       );
